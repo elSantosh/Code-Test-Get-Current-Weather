@@ -437,7 +437,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 529UW8C346;
+				DEVELOPMENT_TEAM = 94HSX365VJ;
 				INFOPLIST_FILE = "Code Test – Get Current Weather/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -455,7 +455,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 529UW8C346;
+				DEVELOPMENT_TEAM = 94HSX365VJ;
 				INFOPLIST_FILE = "Code Test – Get Current Weather/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

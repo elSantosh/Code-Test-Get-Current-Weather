@@ -95,31 +95,30 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
 		</style>
 		
 		<h1></h1>
-		
-		<table>
+
+		<table id="data-table">
 		<tr>
 		<td>City</td>
-		<td>Melbourne</td>
+		<td id="City">Melbourne</td>
 		</tr>
 		<tr>
 		<td>Updated Time</td>
-		<td>Thursday 11:00 AM</td>
+		<td id="Updated Time">Thursday 11:00 AM</td>
 		</tr>
 		<tr>
 		<td>Weather</td>
-		<td>Mostly Cloudy</td>
+		<td id="Weather">Mostly Cloudy</td>
 		</tr>
 		<tr>
 		<td>Temperature</td>
-		<td>9°C</td>
+		<td id="Temperature">9°C</td>
 		</tr>
 		<tr>
 		<td>Wind</td>
-		<td>30km/h</td>
+		<td id="Wind">30km/h</td>
 		</tr>
 		</table>
-				
-		
+
 		"""
 		webView.loadHTMLString(htmlString, baseURL: nil)
 	}
@@ -164,8 +163,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
 		
 //		let jstring = "const person = { firstName: 'John', lastName: 'Doe', age: 50, eyeColor: 'blue', }; function postMessage(message, callBack) { message.callBack = callBack.toString(); window.webkit.messageHandlers.callbackHandler.postMessage(message); } document.getElementById('Select City').onchange = function () { postMessage(person, function (args) { console.log('call back is invoked' ); console.log(args); }); };"
 		
-		let jscript = "function test(a) { var x = (a.value || a.options[a.selectedIndex].value); window.webkit.messageHandlers.callbackHandler.postMessage(x); }"
-		webView.evaluateJavaScript(jscript, completionHandler: nil)
+//        let normalString = "jsonString"
+//        
+//        let jscript = "function test(a) { var x = (a.value || a.options[a.selectedIndex].value); window.webkit.messageHandlers.callbackHandler.postMessage(x); document.getElementById('City').innerHTML = '\(normalString)'; document.getElementById('Updated Time').innerHTML = 'Friday 11:00 AM'; document.getElementById('Weather').innerHTML = 'Rainy'; document.getElementById('Temperature').innerHTML = '12°C'; document.getElementById('e').innerHTML = 'Engine'; document.getElementById('Wind').innerHTML = '24km/h';} "
+//        webView.evaluateJavaScript(jscript, completionHandler: nil)
 	}
 	
 	// Helper
@@ -175,8 +176,12 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
 	
 	//MARK: Calling Weather API
 	func callWeatherAPI(cityname:String){
+        
+        let appId = "ec1f81d7376043d463b1a7d4f50b87fa"
+        
+       
 
-		let request = NSMutableURLRequest(url: NSURL(string: "https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22")! as URL,
+		let request = NSMutableURLRequest(url: NSURL(string: "http://api.openweathermap.org/data/2.5/weather?q=Sydney,Au&units=metric&appid=\(appId)")! as URL,
 										  cachePolicy: .useProtocolCachePolicy,
 										  timeoutInterval: 10.0)
 		request.httpMethod = "GET"
@@ -187,7 +192,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
 					// Convert NSData to Dictionary where keys are of type String, and values are of any type
 					let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:AnyObject]
 					print(json)
-					
+                    var cityName = ""
+                    var updateTime = ""
+                    var weather = ""
+                    var temparature = ""
+                    var wind = ""
 					DispatchQueue.global(qos: .userInitiated).async { [weak self] in
 						guard let self = self else {
 							return
@@ -196,81 +205,68 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKSc
 						// 2
 						DispatchQueue.main.async { [weak self] in
 							// 3
-							let tableString = """
-							
-							<!DOCTYPE html>
-							<html>
-							<head>
-							<style>
-							table {
-							width:50%;
-							}
-							table, th, td {
-							border: 1px solid black;
-							border-collapse: collapse;
-							}
-							th, td {
-							padding: 5px;
-							text-align: left;
-							}
-							table#t01 tr:nth-child(even) {
-							background-color: #5e5e5e;
-							}
-							table#t01 tr:nth-child(odd) {
-							background-color: #fff;
-							}
-							table#t01 th {
-							background-color: black;
-							color: white;
-							}
-							</style>
-							
-							
-							</head>
-							<body>
-							
-							<h2>Styling Tables</h2>
-							
-							<table>
-							<tr>
-							<th>Firstname</th>
-							<th>Lastname</th>
-							<th>Age</th>
-							</tr>
-							<tr>
-							<td>Jill</td>
-							<td>Smith</td>
-							<td>50</td>
-							</tr>
-							<tr>
-							<td>Eve</td>
-							<td>Jackson</td>
-							<td>94</td>
-							</tr>
-							<tr>
-							<td>John</td>
-							<td>Doe</td>
-							<td>80</td>
-							</tr>
-							</table>
-							<br>
-							</body>
-							</html>
-							
-							"""
-//							let webview2 = WKWebView(frame: CGRect(x: 30, y: 30, width: 200, height: 100), configuration: WKWebViewConfiguration())
-//							webview2.loadHTMLString(tableString, baseURL: nil)
-//							self?.webView.addSubview(webview2)
-							
-							
-							let injectSrc = "var i = document.createElement('div'); i.innerHTML = '<!DOCTYPE html> <html> <head> <style> table { width:50%; } table, th, td { border: 1px solid black; border-collapse: collapse; } th, td { padding: 5px; text-align: left; } table#t01 tr:nth-child(even) { background-color: #5e5e5e; } table#t01 tr:nth-child(odd) { background-color: #fff; } table#t01 th { background-color: black; color: white; } </style> </head> <body> <h2>Styling Tables</h2> <table> <tr> <th>Firstname</th> <th>Lastname</th> <th>Age</th> </tr> <tr> <td>Jill</td> <td>Smith</td> <td>50</td> </tr> <tr> <td>Eve</td> <td>Jackson</td> <td>94</td> </tr> <tr> <td>John</td> <td>Doe</td> <td>80</td> </tr> </table> <br> </body> </html>';document.documentElement.appendChild(i);"
-//							self?.webView.evaluateJavaScript(injectSrc, completionHandler: nil)
-
+                            
+                        if let response = json as NSDictionary?
+                        {
+                            if let City:String = response.value(forKey: "name") as? String{
+                                
+                                cityName = City
+                            
+                            }
+                            if let UpdateTime = response.value(forKey: "dt") as? TimeInterval{
+                                
+                                let date = Date(timeIntervalSince1970: UpdateTime)
+                                let dateFormatter = DateFormatter()
+                                dateFormatter.timeZone = .autoupdatingCurrent
+                                dateFormatter.locale = NSLocale.current
+                                dateFormatter.dateFormat = "EEEE, HH:mm a"
+                                updateTime = dateFormatter.string(from: date)
+                            }
+                            if let WeatherAry = response.value(forKey: "weather") as! NSArray?
+                            {
+                                if let weatherDict: NSDictionary = WeatherAry.object(at: 0) as? NSDictionary
+                                    {
+                                        weather = (weatherDict["description"] as! String?)!
+                                }
+                            }
+                            
+                            if let TemparatureDict = response.value(forKey: "main") as! NSDictionary?{
+                                
+                               
+                                if let TempDouble: Double = TemparatureDict["temp"] as? Double {
+                                    temparature = NSString(format: "%.f℃", TempDouble) as String}
+                                
+                                
+                            }
+                            if let Wind = response.value(forKey: "wind") as! NSDictionary?
+                            {
+                                
+                                if let WindDict = Wind as NSDictionary?
+                                {
+                                    if let windDouble:Double = WindDict["speed"] as? Double
+                                    {
+                                        let KmPerHr: Double = (18 * ( windDouble))/5 as Double? ?? 0
+                                        
+                                        wind = NSString(format: "%.1f km/h", KmPerHr as CVarArg) as String
+                                        
+                                    }
+                                    
+                                }
+                            
+                                
+                            }
+                                
+                            
+                            }
+                            
+                              let jscript = "function test(a) { var x = (a.value || a.options[a.selectedIndex].value); window.webkit.messageHandlers.callbackHandler.postMessage(x); document.getElementById('City').innerHTML = '\(cityName)'; document.getElementById('Updated Time').innerHTML = '\(updateTime)'; document.getElementById('Weather').innerHTML = '\(weather)'; document.getElementById('Temperature').innerHTML = '\(temparature)';document.getElementById('Wind').innerHTML = '\(wind)';}"
+                            
+                            self?.webView.evaluateJavaScript(jscript, completionHandler: nil)
 						}
 					}
 					
 					
-					//do your stuff
+					
 					
 					//  completionHandler(true)
 					
