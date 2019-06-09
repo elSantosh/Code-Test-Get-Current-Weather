@@ -3,7 +3,7 @@
 import XCTest
 
 class ___FILEBASENAMEASIDENTIFIER___: XCTestCase {
-
+var app: XCUIApplication!
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
@@ -18,11 +18,21 @@ class ___FILEBASENAMEASIDENTIFIER___: XCTestCase {
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app = nil
+        super.tearDown()
+        
     }
 
-    func testExample() {
+    func testAPIExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        app = XCUIApplication()
+        app.webViews.otherElements["Sydney"].tap()
+        app/*@START_MENU_TOKEN@*/.pickerWheels["Sydney"]/*[[".pickers.pickerWheels[\"Sydney\"]",".pickerWheels[\"Sydney\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.toolbars["Toolbar"].buttons["Done"].tap()
+        
+        
     }
 
 }
