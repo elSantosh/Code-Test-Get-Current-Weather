@@ -15,6 +15,9 @@
 		186827DB22A7E2A4004EF815 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 186827D922A7E2A4004EF815 /* LaunchScreen.storyboard */; };
 		186827E622A7E2A4004EF815 /* Code_Test___Get_Current_WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186827E522A7E2A4004EF815 /* Code_Test___Get_Current_WeatherTests.swift */; };
 		186827F122A7E2A4004EF815 /* Code_Test___Get_Current_WeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186827F022A7E2A4004EF815 /* Code_Test___Get_Current_WeatherUITests.swift */; };
+		20C729AC22ACEBA600244F6D /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C729AB22ACEBA600244F6D /* NetworkReachability.swift */; };
+		20C729AD22ACEBA600244F6D /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C729AB22ACEBA600244F6D /* NetworkReachability.swift */; };
+		20C729AE22ACEBA600244F6D /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C729AB22ACEBA600244F6D /* NetworkReachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,7 @@
 		186827EC22A7E2A4004EF815 /* Code Test – Get Current WeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Code Test – Get Current WeatherUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		186827F022A7E2A4004EF815 /* Code_Test___Get_Current_WeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Code_Test___Get_Current_WeatherUITests.swift"; sourceTree = "<group>"; };
 		186827F222A7E2A4004EF815 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20C729AB22ACEBA600244F6D /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 			children = (
 				186827CD22A7E29F004EF815 /* AppDelegate.swift */,
 				186827CF22A7E29F004EF815 /* ViewController.swift */,
+				20C729AB22ACEBA600244F6D /* NetworkReachability.swift */,
 				186827D122A7E29F004EF815 /* Main.storyboard */,
 				186827D722A7E2A4004EF815 /* Assets.xcassets */,
 				186827D922A7E2A4004EF815 /* LaunchScreen.storyboard */,
@@ -262,6 +267,7 @@
 				186827D622A7E29F004EF815 /* Code_Test___Get_Current_Weather.xcdatamodeld in Sources */,
 				186827D022A7E29F004EF815 /* ViewController.swift in Sources */,
 				186827CE22A7E29F004EF815 /* AppDelegate.swift in Sources */,
+				20C729AC22ACEBA600244F6D /* NetworkReachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				186827E622A7E2A4004EF815 /* Code_Test___Get_Current_WeatherTests.swift in Sources */,
+				20C729AD22ACEBA600244F6D /* NetworkReachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				186827F122A7E2A4004EF815 /* Code_Test___Get_Current_WeatherUITests.swift in Sources */,
+				20C729AE22ACEBA600244F6D /* NetworkReachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

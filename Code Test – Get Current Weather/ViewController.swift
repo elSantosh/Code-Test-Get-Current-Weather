@@ -55,6 +55,14 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default
+            .addObserver(self,
+                         selector: #selector(statusManager),
+                         name: .flagsChanged,
+                         object: nil)
+        updateUserInterface()
+        
+        
         //confugure wkwebview with above writter web config
         webView = WKWebView(frame: .zero, configuration: webConfig)
         webView.navigationDelegate = self
@@ -128,6 +136,39 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
         webView.loadHTMLString(htmlString, baseURL: nil)
     }
     
+    
+    func updateUserInterface() {
+        switch Network.reachability.status {
+            
+            
+        case .unreachable:
+            DispatchQueue.main.async {
+                
+                self.webView.backgroundColor = .red
+                self.view = self.webView
+            }
+        case .wwan:
+            DispatchQueue.main.async {
+                
+                self.webView.backgroundColor = .yellow
+                self.view = self.webView
+            }
+        case .wifi:
+            DispatchQueue.main.async {
+                
+                self.webView.backgroundColor = .green
+                self.view.backgroundColor = .blue
+            }
+        }
+        print("Reachability Summary")
+        print("Status:", Network.reachability.status)
+        print("HostName:", Network.reachability.hostname ?? "nil")
+        print("Reachable:", Network.reachability.isReachable)
+        print("Wifi:", Network.reachability.isReachableViaWiFi)
+    }
+    @objc func statusManager(_ notification: Notification) {
+        updateUserInterface()
+    }
     //WKScriptMessageHandler stub
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if(message.name == "callbackHandler") {
