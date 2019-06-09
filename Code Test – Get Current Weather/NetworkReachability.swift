@@ -10,6 +10,7 @@ import Foundation
 import Network
 import SystemConfiguration
 
+//class written to check the internet connection
 class NetworkReachability {
     var hostname: String?
     var isRunning = false
@@ -68,6 +69,7 @@ func callout(reachability: SCNetworkReachability, flags: SCNetworkReachabilityFl
 
 extension NetworkReachability {
     
+    //look for the reachability
     func start() throws {
         guard let reachability = reachability, !isRunning else { return }
         var context = SCNetworkReachabilityContext(version: 0, info: nil, retain: nil, release: nil, copyDescription: nil)
@@ -82,6 +84,7 @@ extension NetworkReachability {
         isRunning = true
     }
     
+    //stop checking the reachability examination 
     func stop() {
         defer { isRunning = false }
         guard let reachability = reachability else { return }

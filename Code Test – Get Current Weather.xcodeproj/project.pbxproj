@@ -10,11 +10,12 @@
 		186827CE22A7E29F004EF815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186827CD22A7E29F004EF815 /* AppDelegate.swift */; };
 		186827D022A7E29F004EF815 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186827CF22A7E29F004EF815 /* ViewController.swift */; };
 		186827D322A7E29F004EF815 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 186827D122A7E29F004EF815 /* Main.storyboard */; };
-		186827D622A7E29F004EF815 /* Code_Test___Get_Current_Weather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 186827D422A7E29F004EF815 /* Code_Test___Get_Current_Weather.xcdatamodeld */; };
 		186827D822A7E2A4004EF815 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 186827D722A7E2A4004EF815 /* Assets.xcassets */; };
 		186827DB22A7E2A4004EF815 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 186827D922A7E2A4004EF815 /* LaunchScreen.storyboard */; };
 		186827E622A7E2A4004EF815 /* Code_Test___Get_Current_WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186827E522A7E2A4004EF815 /* Code_Test___Get_Current_WeatherTests.swift */; };
 		186827F122A7E2A4004EF815 /* Code_Test___Get_Current_WeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186827F022A7E2A4004EF815 /* Code_Test___Get_Current_WeatherUITests.swift */; };
+		201181C422AD13A000EF332A /* CodeTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2051530122AD05A800FEBE8B /* CodeTest.xcdatamodeld */; };
+		201181C622AD28B100EF332A /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201181C522AD28B100EF332A /* Config.swift */; };
 		20C729AC22ACEBA600244F6D /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C729AB22ACEBA600244F6D /* NetworkReachability.swift */; };
 		20C729AD22ACEBA600244F6D /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C729AB22ACEBA600244F6D /* NetworkReachability.swift */; };
 		20C729AE22ACEBA600244F6D /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C729AB22ACEBA600244F6D /* NetworkReachability.swift */; };
@@ -42,7 +43,6 @@
 		186827CD22A7E29F004EF815 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		186827CF22A7E29F004EF815 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		186827D222A7E29F004EF815 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		186827D522A7E29F004EF815 /* Code_Test___Get_Current_Weather.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Code_Test___Get_Current_Weather.xcdatamodel"; sourceTree = "<group>"; };
 		186827D722A7E2A4004EF815 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		186827DA22A7E2A4004EF815 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		186827DC22A7E2A4004EF815 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,6 +52,8 @@
 		186827EC22A7E2A4004EF815 /* Code Test – Get Current WeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Code Test – Get Current WeatherUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		186827F022A7E2A4004EF815 /* Code_Test___Get_Current_WeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Code_Test___Get_Current_WeatherUITests.swift"; sourceTree = "<group>"; };
 		186827F222A7E2A4004EF815 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		201181C522AD28B100EF332A /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		2051530222AD05A800FEBE8B /* Code_Test___Get_Current_Weather.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Code_Test___Get_Current_Weather.xcdatamodel"; sourceTree = "<group>"; };
 		20C729AB22ACEBA600244F6D /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,11 +108,12 @@
 				186827CD22A7E29F004EF815 /* AppDelegate.swift */,
 				186827CF22A7E29F004EF815 /* ViewController.swift */,
 				20C729AB22ACEBA600244F6D /* NetworkReachability.swift */,
+				201181C522AD28B100EF332A /* Config.swift */,
 				186827D122A7E29F004EF815 /* Main.storyboard */,
 				186827D722A7E2A4004EF815 /* Assets.xcassets */,
 				186827D922A7E2A4004EF815 /* LaunchScreen.storyboard */,
 				186827DC22A7E2A4004EF815 /* Info.plist */,
-				186827D422A7E29F004EF815 /* Code_Test___Get_Current_Weather.xcdatamodeld */,
+				2051530122AD05A800FEBE8B /* CodeTest.xcdatamodeld */,
 			);
 			path = "Code Test – Get Current Weather";
 			sourceTree = "<group>";
@@ -264,8 +267,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				186827D622A7E29F004EF815 /* Code_Test___Get_Current_Weather.xcdatamodeld in Sources */,
+				201181C422AD13A000EF332A /* CodeTest.xcdatamodeld in Sources */,
 				186827D022A7E29F004EF815 /* ViewController.swift in Sources */,
+				201181C622AD28B100EF332A /* Config.swift in Sources */,
 				186827CE22A7E29F004EF815 /* AppDelegate.swift in Sources */,
 				20C729AC22ACEBA600244F6D /* NetworkReachability.swift in Sources */,
 			);
@@ -444,9 +448,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 94HSX365VJ;
 				INFOPLIST_FILE = "Code Test – Get Current Weather/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -454,6 +460,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "me.workstreak.Code-Test---Get-Current-Weather";
 				PRODUCT_MODULE_NAME = CodeTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -463,9 +470,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 94HSX365VJ;
 				INFOPLIST_FILE = "Code Test – Get Current Weather/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -473,6 +482,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "me.workstreak.Code-Test---Get-Current-Weather";
 				PRODUCT_MODULE_NAME = CodeTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -602,13 +612,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		186827D422A7E29F004EF815 /* Code_Test___Get_Current_Weather.xcdatamodeld */ = {
+		2051530122AD05A800FEBE8B /* CodeTest.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				186827D522A7E29F004EF815 /* Code_Test___Get_Current_Weather.xcdatamodel */,
+				2051530222AD05A800FEBE8B /* Code_Test___Get_Current_Weather.xcdatamodel */,
 			);
-			currentVersion = 186827D522A7E29F004EF815 /* Code_Test___Get_Current_Weather.xcdatamodel */;
-			path = "Code_Test___Get_Current_Weather.xcdatamodeld";
+			currentVersion = 2051530222AD05A800FEBE8B /* Code_Test___Get_Current_Weather.xcdatamodel */;
+			path = CodeTest.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

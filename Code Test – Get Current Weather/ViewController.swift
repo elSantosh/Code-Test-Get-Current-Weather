@@ -8,11 +8,15 @@
 
 import UIKit
 import WebKit
+import CoreData
 
 class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegate, WKUIDelegate, WKScriptMessageHandler{
     
     //declaring webview
     @objc var webView = WKWebView()
+    //coredate object
+    var city: [NSManagedObject] = []
+    var selectedCity = String()
 
     var webConfig:WKWebViewConfiguration {
         get {
@@ -137,6 +141,23 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "City")
+
+        do {
+            city = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+    
     func updateUserInterface() {
         switch Network.reachability.status {
             
@@ -144,20 +165,50 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
         case .unreachable:
             DispatchQueue.main.async {
                 
-                self.webView.backgroundColor = .red
-                self.view = self.webView
+                let alert = UIAlertController(title: "No Internet", message: "Displaying last updated result!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    switch action.style{
+                    case .default:
+                        print("default")
+                        
+                    case .cancel:
+                        print("cancel")
+                        
+                    case .destructive:
+                        print("destructive")
+                        
+                    @unknown default: break
+                        
+                    }}))
+                self.present(alert, animated: true, completion: nil)
+
+                //if the network unavailable update table with latest retrived data
+                if self.city.count > 0 {
+                
+                //retrive core data when it contains an object
+                let cityValues = self.city[self.city.count-1]
+                
+                let cityNameInDB = cityValues.value(forKeyPath: "name") as! String
+                let updatedTimeInDB = cityValues.value(forKeyPath: "updatedtime") as! String
+                let weatherInDB = cityValues.value(forKeyPath: "weather") as! String
+                let temparatureInDB = cityValues.value(forKeyPath: "temparature") as! String
+                let windInDB = cityValues.value(forKeyPath: "wind") as! String
+                
+                
+                let jscript = "document.getElementById('City').innerHTML = '\(cityNameInDB)'; document.getElementById('Updated Time').innerHTML = '\(updatedTimeInDB)'; document.getElementById('Weather').innerHTML = '\(weatherInDB)'; document.getElementById('Temperature').innerHTML = '\(temparatureInDB)';document.getElementById('Wind').innerHTML = '\(windInDB)';"
+                
+                self.webView.evaluateJavaScript(jscript, completionHandler: nil)
+                }
             }
+                
         case .wwan:
             DispatchQueue.main.async {
                 
-                self.webView.backgroundColor = .yellow
-                self.view = self.webView
+                //network available
             }
         case .wifi:
             DispatchQueue.main.async {
-                
-                self.webView.backgroundColor = .green
-                self.view.backgroundColor = .blue
+                //net work available
             }
         }
         print("Reachability Summary")
@@ -172,9 +223,9 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
     //WKScriptMessageHandler stub
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if(message.name == "callbackHandler") {
-            
+            self.selectedCity = message.body as! String
             print(message.body)
-            self.callWeatherAPI(cityname: message.body as! String )
+            self.callWeatherAPI(givenCityname: message.body as! String )
         }
         
     }
@@ -190,6 +241,8 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
     
     func insertCSSString(into webView: WKWebView) {
         let jsString = "var list = document.getElementById('Select City'); webkit.messageHandlers.callbackHandler.postMessage(list.options[list.selectedIndex].value); list.onchange = function () { var city =list.options[list.selectedIndex].value;  webkit.messageHandlers.callbackHandler.postMessage(city); }"
+        
+        
         webView.evaluateJavaScript(jsString, completionHandler: nil)
     }
     
@@ -199,13 +252,13 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
     }
     
     //MARK: Calling Weather API
-    func callWeatherAPI(cityname:String){
+    func callWeatherAPI(givenCityname:String){
         
-        let appId = "ec1f81d7376043d463b1a7d4f50b87fa"
+        let configAPI = Config()
         
+        let URLString = configAPI.constructAPI(cityName: givenCityname)
         
-        
-        let request = NSMutableURLRequest(url: NSURL(string: "http://api.openweathermap.org/data/2.5/weather?q=\(cityname)&units=metric&appid=\(appId)")! as URL,
+        let request = NSMutableURLRequest(url: NSURL(string:URLString)! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         request.httpMethod = "GET"
@@ -215,7 +268,9 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
                 do {
                     // Convert NSData to Dictionary where keys are of type String, and values are of any type
                     let json = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String:AnyObject]
-                    print(json)
+//                    print(json)
+                    
+                    //we can also we object formation/ since small data, I've not used any object or struct
                     var cityName = ""
                     var updateTime = ""
                     var weather = ""
@@ -226,6 +281,8 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
                             return
                         }
                         // 2
+                        
+                        //Updating UI in the main queue to avoid crashes
                         DispatchQueue.main.async { [weak self] in
                             // 3
                             
@@ -242,6 +299,7 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
                                     let dateFormatter = DateFormatter()
                                     dateFormatter.timeZone = .autoupdatingCurrent
                                     dateFormatter.locale = NSLocale.current
+                                    //using string for required format, multiple formats available
                                     dateFormatter.dateFormat = "EEEE, HH:mm a"
                                     updateTime = dateFormatter.string(from: date)
                                 }
@@ -255,7 +313,7 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
                                 
                                 if let TemparatureDict = response.value(forKey: "main") as! NSDictionary?{
                                     
-                                    
+                                    //obtaining tempature from data 
                                     if let TempDouble: Double = TemparatureDict["temp"] as? Double {
                                         temparature = NSString(format: "%.f℃", TempDouble) as String}
                                     
@@ -268,6 +326,7 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
                                     {
                                         if let windDouble:Double = WindDict["speed"] as? Double
                                         {
+                                            //converting m/s to km/h
                                             let KmPerHr: Double = (18 * ( windDouble))/5 as Double? ?? 0
                                             
                                             wind = NSString(format: "%.1f km/h", KmPerHr as CVarArg) as String
@@ -281,6 +340,17 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
                                 
                                 
                             }
+                            //MARK: Save/Update data from API into core data
+                            
+                            let cityDictionary = NSMutableDictionary()
+                            cityDictionary.setValue(cityName, forKey: "CityName")
+                            cityDictionary.setValue(updateTime, forKey: "UpdatedTime")
+                            cityDictionary.setValue(weather, forKey: "Weather")
+                            cityDictionary.setValue(temparature, forKey: "Temparature")
+                            cityDictionary.setValue(wind, forKey: "Wind")
+                            
+                            self?.save(CityDict: cityDictionary, forCity: givenCityname as NSString)
+                            
                             
                             let jscript = "document.getElementById('City').innerHTML = '\(cityName)'; document.getElementById('Updated Time').innerHTML = '\(updateTime)'; document.getElementById('Weather').innerHTML = '\(weather)'; document.getElementById('Temperature').innerHTML = '\(temparature)';document.getElementById('Wind').innerHTML = '\(wind)';"
                             
@@ -289,7 +359,7 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
                         }
                     }
                     
-                    
+                    //we can execute something on the completion of the above loop, now no operation needed
                     //  completionHandler(true)
                     
                 } catch {
@@ -304,7 +374,35 @@ class ViewController: UIViewController, WKNavigationDelegate,UIScrollViewDelegat
         
 
     }
-    
+ 
+    //MARK: Save data into core data
+    func save(CityDict: NSDictionary, forCity:NSString) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        //create a context entity
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "City", in: managedContext)!
+        let cityData = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        //Store value for each into the coredata
+        
+        cityData.setValue(CityDict.value(forKey: "CityName"), forKeyPath:"name")
+        cityData.setValue(CityDict.value(forKey: "UpdatedTime"), forKeyPath:"updatedtime")
+        cityData.setValue(CityDict.value(forKey: "Weather"), forKeyPath:"weather")
+        cityData.setValue(CityDict.value(forKey: "Temparature"), forKeyPath:"temparature")
+        cityData.setValue(CityDict.value(forKey: "Wind"), forKeyPath:"wind")
+        
+        do {
+            try managedContext.save()
+            //removing previously stored data
+            city.removeAll()
+            //insert or append new data
+            city.append(cityData)
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
     
     
 }
