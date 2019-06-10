@@ -5,6 +5,8 @@ Repository URL :https://github.com/elSantosh/Code-Test-Get-Current-Weather
 
 This project will allow user to select three cities in Australia and return the its current weather in five fields of data. All the obtained data is from https://openweathermap.org/api. The units which I’ve used to show the result is in metrics. 
 
+![alt text](https://github.com/elSantosh/Code-Test-Get-Current-Weather/blob/master/Code%20Test%20%E2%80%93%20Get%20Current%20Weather/preview.png)
+
 Coding Flow:
 
 UI in HTML on WKWebView with custom web configuration (UIWebView is depreciated) 
