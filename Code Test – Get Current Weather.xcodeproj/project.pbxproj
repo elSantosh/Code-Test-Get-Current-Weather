@@ -16,6 +16,7 @@
 		186827F122A7E2A4004EF815 /* Code_Test___Get_Current_WeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186827F022A7E2A4004EF815 /* Code_Test___Get_Current_WeatherUITests.swift */; };
 		201181C422AD13A000EF332A /* CodeTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2051530122AD05A800FEBE8B /* CodeTest.xcdatamodeld */; };
 		201181C622AD28B100EF332A /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201181C522AD28B100EF332A /* Config.swift */; };
+		202672F722AE632D0067B8FE /* preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 202672F622AE632D0067B8FE /* preview.png */; };
 		20C729AC22ACEBA600244F6D /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C729AB22ACEBA600244F6D /* NetworkReachability.swift */; };
 		20C729AD22ACEBA600244F6D /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C729AB22ACEBA600244F6D /* NetworkReachability.swift */; };
 		20C729AE22ACEBA600244F6D /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C729AB22ACEBA600244F6D /* NetworkReachability.swift */; };
@@ -53,6 +54,7 @@
 		186827F022A7E2A4004EF815 /* Code_Test___Get_Current_WeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Code_Test___Get_Current_WeatherUITests.swift"; sourceTree = "<group>"; };
 		186827F222A7E2A4004EF815 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		201181C522AD28B100EF332A /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		202672F622AE632D0067B8FE /* preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preview.png; sourceTree = "<group>"; };
 		2051530222AD05A800FEBE8B /* Code_Test___Get_Current_Weather.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Code_Test___Get_Current_Weather.xcdatamodel"; sourceTree = "<group>"; };
 		20C729AB22ACEBA600244F6D /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 				186827D922A7E2A4004EF815 /* LaunchScreen.storyboard */,
 				186827DC22A7E2A4004EF815 /* Info.plist */,
 				2051530122AD05A800FEBE8B /* CodeTest.xcdatamodeld */,
+				202672F622AE632D0067B8FE /* preview.png */,
 			);
 			path = "Code Test – Get Current Weather";
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				186827DB22A7E2A4004EF815 /* LaunchScreen.storyboard in Resources */,
 				186827D822A7E2A4004EF815 /* Assets.xcassets in Resources */,
 				186827D322A7E29F004EF815 /* Main.storyboard in Resources */,
+				202672F722AE632D0067B8FE /* preview.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
